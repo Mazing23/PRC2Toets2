@@ -79,8 +79,46 @@ namespace AnimalTesting
         }
 
         [TestMethod]
-        public void Animal()
+        public void TestAnimalRemove()
         {
+            int number = 13;
+            Animal animal = new Cat(number, new SimpleDate(9, 8, 1995), "Harry", "");
+            Administration admin = new Administration();
+            admin.Add(animal);
+
+            admin.RemoveAnimal(number);
+
+            Assert.AreEqual(null, admin.FindAnimal(number));
+        }
+
+        [TestMethod]
+        public void TestSellAnimal()
+        {
+            int number = 13;
+            Animal animala = new Cat(number, new SimpleDate(9, 8, 1995), "Harry", "");
+            Administration admin = new Administration();
+            admin.Add(animala);
+
+            Animal animalb = new Dog(14, new SimpleDate(9, 8, 1995), "Harry", new SimpleDate(9,6,2018));
+            admin.Add(animalb);
+
+            Animal animalc = new Dog(55000, new SimpleDate(9, 8, 1995), "Harry", new SimpleDate(9, 6, 2018));
+            admin.Add(animalc);
+
+            Assert.AreEqual(200, animalb.GetPrice());
+            Assert.AreEqual(60, animala.GetPrice());
+            Assert.AreEqual(350, animalc.GetPrice());
+        }
+
+        [TestMethod]
+        private void TestAddTrueAnimal()
+        {
+            Animal animala = new Cat(14, new SimpleDate(9, 8, 1995), "Harry", "");
+            Administration admin = new Administration();
+
+            bool b = admin.Add(animala);
+
+            Assert.AreEqual(true, b);
 
         }
     }

@@ -22,7 +22,6 @@ namespace PRC2Toets2
             {
                 if (a.ChipRegistrationNumber == animal.ChipRegistrationNumber)
                 {
-                    allAnimals.Remove(animal);
                     return false;
                 }
             }

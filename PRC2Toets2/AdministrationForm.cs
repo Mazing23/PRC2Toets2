@@ -16,7 +16,9 @@ namespace PRC2Toets2
         private Animal animal;
         private List<Animal> nonReserved;
         private List<Animal> reserved;
+        private int maxNumberPets = 100000;
         Random newNumber = new Random();
+    
 
         public AdministrationForm()
         {
@@ -30,61 +32,9 @@ namespace PRC2Toets2
             AnimalDump();
             UpdateListBox();
         }
+        
 
-        private void AddingCat(string name, SimpleDate date, string behaviour)
-        {
-            int nextnumber = newNumber.Next(100000);
-            string problems = "no";
-
-            if (!string.IsNullOrWhiteSpace(behaviour))
-            {
-                problems = behaviour;
-            }
-            else
-            {
-                problems = null;
-            }
-
-            animal = new Cat(nextnumber, date, name, problems);
-            while (!admin.Add(animal))
-            {
-                int anothernumber = newNumber.Next(100000);
-                animal = new Cat(anothernumber, date, name, problems);
-            }
-            nonReserved.Add(animal);
-        }
-
-        private void AddingDog(string name, SimpleDate date, SimpleDate walk)
-        {
-            int nextnumber = newNumber.Next(100000);
-            SimpleDate walkDate = new SimpleDate(walk.Day, walk.Month, walk.Year);
-
-            if (lastWalkDate.Value.Date == DateTime.Today)
-            {
-                DialogResult result = MessageBox.Show("Was the dog walked today?", "Walk the dog", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    walkDate = walk;
-                }
-                else if (result == DialogResult.No)
-                {
-                    walk = null;
-                }
-            }
-            else
-            {
-                walkDate = walk;
-            }
-
-            animal = new Dog(nextnumber, date, name, walkDate);
-            while (!admin.Add(animal))
-            {
-                int anothernumber = newNumber.Next(100000);
-                animal = new Dog(anothernumber, date, name, walkDate);
-            }
-            nonReserved.Add(animal);
-        }
-
+        
         private void UpdateListBox()
         {
             listBoxAnimalsNotReserved.Items.Clear();
@@ -103,7 +53,6 @@ namespace PRC2Toets2
                 comboBoxFindAnimal.Items.Add(a.ChipRegistrationNumber);
             }
         }
-
         private void DeleteAnimal()
         {
             foreach (Animal a in reserved.ToList())
@@ -126,8 +75,6 @@ namespace PRC2Toets2
 
         private void createAnimalButton_Click(object sender, EventArgs e)
         {
-            int nextnumber = newNumber.Next(100000);
-
             SimpleDate birthDate = new SimpleDate(birthdatePickerAnimal.Value.Day, birthdatePickerAnimal.Value.Month
                 , birthdatePickerAnimal.Value.Year);
             SimpleDate walkDate = new SimpleDate(lastWalkDate.Value.Day, lastWalkDate.Value.Month
@@ -155,6 +102,59 @@ namespace PRC2Toets2
             }
             UpdateListBox();
         }
+        private void AddingCat(string name, SimpleDate date, string behaviour)
+        {
+            int nextnumber = newNumber.Next(maxNumberPets);
+            string problems = "no";
+
+            if (!string.IsNullOrWhiteSpace(behaviour))
+            {
+                problems = behaviour;
+            }
+            else
+            {
+                problems = null;
+            }
+
+            animal = new Cat(nextnumber, date, name, problems);
+            while (!admin.Add(animal))
+            {
+                int anothernumber = newNumber.Next(maxNumberPets);
+                animal = new Cat(anothernumber, date, name, problems);
+            }
+            nonReserved.Add(animal);
+        }
+        private void AddingDog(string name, SimpleDate date, SimpleDate walk)
+        {
+            int nextnumber = newNumber.Next(maxNumberPets);
+            SimpleDate walkDate = new SimpleDate(walk.Day, walk.Month, walk.Year);
+
+            if (lastWalkDate.Value.Date == DateTime.Today)
+            {
+                DialogResult result = MessageBox.Show("Was the dog walked today?", "Walk the dog", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    walkDate = walk;
+                }
+                else if (result == DialogResult.No)
+                {
+                    walk = null;
+                }
+            }
+            else
+            {
+                walkDate = walk;
+            }
+
+            animal = new Dog(nextnumber, date, name, walkDate);
+            while (!admin.Add(animal))
+            {
+                int anothernumber = newNumber.Next(maxNumberPets);
+                animal = new Dog(anothernumber, date, name, walkDate);
+            }
+            nonReserved.Add(animal);
+        }
+
 
         private void buttonFind_Click(object sender, EventArgs e)
         {
@@ -168,7 +168,6 @@ namespace PRC2Toets2
                 UpdateListBox();
             }
         }
-
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (comboBoxFindAnimal.SelectedIndex != -1)
@@ -181,7 +180,6 @@ namespace PRC2Toets2
                 UpdateListBox();
             }       
         }
-
         private void buttonSell_Click(object sender, EventArgs e)
         {
             if(comboBoxFindAnimal.SelectedIndex != -1)
@@ -192,7 +190,6 @@ namespace PRC2Toets2
                 UpdateListBox();
             }
         }
-
         private void ButtonReserve_Click(object sender, EventArgs e)
         {
             Animal currentAnimal = listBoxAnimalsNotReserved.SelectedItem as Animal;
@@ -204,7 +201,6 @@ namespace PRC2Toets2
                 UpdateListBox();
             }
         }
-
         private void buttonUnReserve_Click(object sender, EventArgs e)
         {
             Animal currentAnimal = listBoxAnimalsReserved.SelectedItem as Animal;
@@ -216,7 +212,6 @@ namespace PRC2Toets2
                 UpdateListBox();
             }
         }
-
         private void buttonShowinfo_Click(object sender, EventArgs e)
         {
             Animal currentAnimal = listBoxAnimalsNotReserved.SelectedItem as Animal;
@@ -225,6 +220,7 @@ namespace PRC2Toets2
                 MessageBox.Show(currentAnimal.ToString());
             }
         }
+
 
         private void animalTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -243,6 +239,8 @@ namespace PRC2Toets2
                 lastWalkDate.Visible = true;
             }
         }
+
+
 
         private void AnimalDump()
         {
