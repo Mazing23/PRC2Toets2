@@ -182,7 +182,7 @@
             // 
             this.lastWalkDate.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.lastWalkDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.lastWalkDate.Location = new System.Drawing.Point(90, 201);
+            this.lastWalkDate.Location = new System.Drawing.Point(90, 206);
             this.lastWalkDate.Name = "lastWalkDate";
             this.lastWalkDate.RightToLeftLayout = true;
             this.lastWalkDate.Size = new System.Drawing.Size(160, 22);
@@ -208,7 +208,7 @@
             // 
             // problemsCatTextBox
             // 
-            this.problemsCatTextBox.Location = new System.Drawing.Point(91, 201);
+            this.problemsCatTextBox.Location = new System.Drawing.Point(92, 206);
             this.problemsCatTextBox.Name = "problemsCatTextBox";
             this.problemsCatTextBox.Size = new System.Drawing.Size(160, 22);
             this.problemsCatTextBox.TabIndex = 8;

@@ -15,14 +15,7 @@ namespace PRC2Toets2
                    string name, string badHabits)
             : base(chipRegistrationNumber, dateOfBirth, name)
         {
-            if (!string.IsNullOrEmpty(badHabits))
-            {
-                BadHabits = null;
-            }
-            else
-            {
-                BadHabits = badHabits;
-            }
+            BadHabits = badHabits;
             Price = GetPrice();
         }
 

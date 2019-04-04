@@ -21,6 +21,7 @@ namespace PRC2Toets2
         public AdministrationForm()
         {
             InitializeComponent();
+            animalTypeComboBox.SelectedIndex = 0;
 
             admin = new Administration();
             nonReserved = new List<Animal>();
@@ -33,9 +34,9 @@ namespace PRC2Toets2
         private void AddingCat(string name, SimpleDate date, string behaviour)
         {
             int nextnumber = newNumber.Next(100000);
-            string problems;
+            string problems = "no";
 
-            if (string.IsNullOrWhiteSpace(behaviour))
+            if (!string.IsNullOrWhiteSpace(behaviour))
             {
                 problems = behaviour;
             }
@@ -131,6 +132,11 @@ namespace PRC2Toets2
                 , lastWalkDate.Value.Year);
 
             string selectedAnimal = animalTypeComboBox.SelectedItem.ToString();
+
+            if (string.IsNullOrWhiteSpace(animalNameTextBox.Text) || string.IsNullOrEmpty(animalNameTextBox.Text))
+            {
+                MessageBox.Show("Geef dit arme beestje een naam!");
+            }
 
             if (!string.IsNullOrWhiteSpace(animalNameTextBox.Text))
             {
