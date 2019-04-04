@@ -90,6 +90,8 @@ namespace PRC2Toets2
             listBoxAnimalsNotReserved.Items.Clear();
             listBoxAnimalsReserved.Items.Clear();
             comboBoxFindAnimal.Items.Clear();
+            nonReserved.Sort();
+            reserved.Sort();
             foreach(Animal a in nonReserved)
             {
                 listBoxAnimalsNotReserved.Items.Add(a);
