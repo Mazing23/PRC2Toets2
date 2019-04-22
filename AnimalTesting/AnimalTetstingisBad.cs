@@ -31,6 +31,7 @@ namespace AnimalTesting
         [TestMethod]
         public void TestAddingAnimalPartTwo()
         {
+            //minder cmplex
             int number = 13;
             Animal animal = new Cat(number, new SimpleDate(9, 8, 1995), "Harry", "");
             Administration admin = new Administration();
@@ -47,20 +48,25 @@ namespace AnimalTesting
             }
 
             Assert.AreEqual(animalb, admin.FindAnimal(14));
+            Assert.AreEqual(animal, admin.FindAnimal(13));
         }
 
         [TestMethod]
-        public void AnimalAddTestFail()
+        public void AnimalAddTestFail() //name test will fail to add second animal
         {
             SimpleDate date = new SimpleDate(9, 6, 1995);
             Animal animal = new Cat(13, date, "harry", "");
             Administration admin = new Administration();
-            bool a = admin.Add(animal);
+            //bool a = admin.Add(animal);
 
             Animal animalTwo = new Dog(13, date, "HarryTwo", date);
             bool b = admin.Add(animalTwo);
 
-            Assert.AreNotEqual(a, b);
+            Assert.AreNotEqual(a, b); //assert.isfalse(b)
+            //collection
+            //eerst test schrijven, dan code.
+            //simple, simple, simple
+            //first test than simple code, then test, then simple code//
         }
 
         [TestMethod]
@@ -111,7 +117,7 @@ namespace AnimalTesting
         }
 
         [TestMethod]
-        private void TestAddTrueAnimal()
+        public void TestAddTrueAnimal()
         {
             Animal animala = new Cat(14, new SimpleDate(9, 8, 1995), "Harry", "");
             Administration admin = new Administration();

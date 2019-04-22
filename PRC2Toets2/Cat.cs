@@ -9,7 +9,7 @@ namespace PRC2Toets2
     public class Cat : Animal
     {
         public string BadHabits { get; set; }
-        public override decimal Price { get; set; }
+        public override decimal Price { get; set; } // set to go // return getprice to get // getprice method not neccesary
 
         public Cat(int chipRegistrationNumber, SimpleDate dateOfBirth,
                    string name, string badHabits)

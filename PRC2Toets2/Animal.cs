@@ -12,7 +12,7 @@ namespace PRC2Toets2
         public SimpleDate DateOfBirth { get; private set; }
         public string Name { get; private set; }
         public bool IsReserved { get; set; }
-        public abstract decimal Price { get; set; }
+        public abstract decimal Price { get; set; } // set not here
 
 
 
@@ -28,6 +28,8 @@ namespace PRC2Toets2
 
         public int CompareTo(Animal compare)
         {
+            // what is animal is null
+            // msdn voor null interface
             int Value;
             if (ChipRegistrationNumber > compare.ChipRegistrationNumber)
                 Value = 1;

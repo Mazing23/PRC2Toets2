@@ -9,7 +9,8 @@ namespace PRC2Toets2
     public class Administration
     {
         private List<Animal> allAnimals;
-
+        //auto properties
+        //backingfiels/calculated !!!!!!!!!!!!
 
         public Administration()
         {
