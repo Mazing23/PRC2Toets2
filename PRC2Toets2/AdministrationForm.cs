@@ -51,7 +51,7 @@ namespace PRC2Toets2
 
         private void DeleteAnimal()
         {
-            foreach(Animal a in admin.AllAnimals)
+            foreach(Animal a in admin.AllAnimals.ToList())
             {
                 if (a.ChipRegistrationNumber == Convert.ToInt32(comboBoxFindAnimal.Text))
                 {
