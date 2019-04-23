@@ -66,7 +66,7 @@ namespace AnimalTesting
         }
 
         [TestMethod]
-        public void Test_Will_Fail_To_Add_Second_Animal()
+        public void Test_Will_Fail_To_Add_Second_Animal_w_Same_ID()
         {
             Add_Animal_To_AllAnimal_List();
 
