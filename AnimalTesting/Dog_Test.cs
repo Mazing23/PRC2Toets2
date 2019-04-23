@@ -36,5 +36,14 @@ namespace AnimalTesting
             decimal price = animala.Price;
             Assert.AreEqual(200, price);
         }
+
+        [TestMethod]
+        public void Price_WillNotBe_EqualBased_ID_Number()
+        {
+            admin.Add(animala);
+            admin.Add(animalc);
+            decimal price = animala.Price;
+            Assert.AreNotEqual(animalc.Price, price);
+        }
     }
 }
