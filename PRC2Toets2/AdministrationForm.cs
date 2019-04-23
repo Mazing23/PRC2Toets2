@@ -14,8 +14,6 @@ namespace PRC2Toets2
     {
         private Administration admin;
         private Animal animal;
-        private List<Animal> nonReserved;
-        private List<Animal> reserved;
         private int maxNumberPets = 100000;
         Random newNumber = new Random();
     
@@ -24,11 +22,7 @@ namespace PRC2Toets2
         {
             InitializeComponent();
             animalTypeComboBox.SelectedIndex = 0;
-
             admin = new Administration();
-            nonReserved = new List<Animal>();
-            reserved = new List<Animal>();
-
             AnimalDump();
             UpdateListBox();
         }
@@ -40,38 +34,31 @@ namespace PRC2Toets2
             listBoxAnimalsNotReserved.Items.Clear();
             listBoxAnimalsReserved.Items.Clear();
             comboBoxFindAnimal.Items.Clear();
-            nonReserved.Sort();
-            reserved.Sort();
-            foreach(Animal a in nonReserved)
+            foreach(Animal a in admin.AllAnimals)
             {
-                listBoxAnimalsNotReserved.Items.Add(a);
-                comboBoxFindAnimal.Items.Add(a.ChipRegistrationNumber);
-            }
-            foreach(Animal a in reserved)
-            {
-                listBoxAnimalsReserved.Items.Add(a);
-                comboBoxFindAnimal.Items.Add(a.ChipRegistrationNumber);
+                if(a.IsReserved)
+                {
+                    listBoxAnimalsReserved.Items.Add(a);
+                    comboBoxFindAnimal.Items.Add(a.ChipRegistrationNumber);
+                }
+                else
+                {
+                    listBoxAnimalsNotReserved.Items.Add(a);
+                    comboBoxFindAnimal.Items.Add(a.ChipRegistrationNumber);
+                }
             }
         }
+
         private void DeleteAnimal()
         {
-            foreach (Animal a in reserved.ToList())
+            foreach(Animal a in admin.AllAnimals)
             {
                 if (a.ChipRegistrationNumber == Convert.ToInt32(comboBoxFindAnimal.Text))
                 {
-                    reserved.Remove(a);
-                }
-            }
-            foreach (Animal a in nonReserved.ToList())
-            {
-                if (a.ChipRegistrationNumber == Convert.ToInt32(comboBoxFindAnimal.Text))
-                {
-                    nonReserved.Remove(a);
+                    admin.AllAnimals.Remove(a);
                 }
             }
         }
-
-
 
         private void createAnimalButton_Click(object sender, EventArgs e)
         {
@@ -102,6 +89,7 @@ namespace PRC2Toets2
             }
             UpdateListBox();
         }
+
         private void AddingCat(string name, SimpleDate date, string behaviour)
         {
             int nextnumber = newNumber.Next(maxNumberPets);
@@ -122,8 +110,9 @@ namespace PRC2Toets2
                 int anothernumber = newNumber.Next(maxNumberPets);
                 animal = new Cat(anothernumber, date, name, problems);
             }
-            nonReserved.Add(animal);
+            admin.Add(animal);
         }
+
         private void AddingDog(string name, SimpleDate date, SimpleDate walk)
         {
             int nextnumber = newNumber.Next(maxNumberPets);
@@ -152,7 +141,7 @@ namespace PRC2Toets2
                 int anothernumber = newNumber.Next(maxNumberPets);
                 animal = new Dog(anothernumber, date, name, walkDate);
             }
-            nonReserved.Add(animal);
+            admin.Add(animal);
         }
 
 
@@ -185,7 +174,7 @@ namespace PRC2Toets2
             if(comboBoxFindAnimal.SelectedIndex != -1)
             {
                 Animal currentAnimal = admin.FindAnimal(Convert.ToInt32(comboBoxFindAnimal.Text));
-                MessageBox.Show("Animal sold for this amount: " + currentAnimal.GetPrice(), "Sale");
+                MessageBox.Show("Animal sold for this amount: " + currentAnimal.Price, "Sale");
                 DeleteAnimal();
                 UpdateListBox();
             }
@@ -196,8 +185,6 @@ namespace PRC2Toets2
             if (currentAnimal != null)
             {
                 currentAnimal.IsReserved = true;
-                nonReserved.Remove(currentAnimal);
-                reserved.Add(currentAnimal);
                 UpdateListBox();
             }
         }
@@ -207,8 +194,6 @@ namespace PRC2Toets2
             if (currentAnimal != null)
             {
                 currentAnimal.IsReserved = false;
-                nonReserved.Add(currentAnimal);
-                reserved.Remove(currentAnimal);
                 UpdateListBox();
             }
         }
@@ -254,11 +239,11 @@ namespace PRC2Toets2
             admin.Add(four);
             Animal five = new Dog(55412, new SimpleDate(17, 12, 2016), "Bijke", new SimpleDate(1, 1, 1980));
             admin.Add(five);
-            nonReserved.Add(one);
-            nonReserved.Add(two);
-            nonReserved.Add(three);
-            nonReserved.Add(four);
-            nonReserved.Add(five);
+            one.IsReserved = true;
+            two.IsReserved = false;
+            three.IsReserved = true;
+            four.IsReserved = true;
+            five.IsReserved = false;
         }
        
     }

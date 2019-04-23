@@ -52,17 +52,16 @@ namespace AnimalTesting
         }
 
         [TestMethod]
-        public void AnimalAddTestFail() //name test will fail to add second animal
+        public void Test_WillFail_To_Add_SecondAnimal() //name test will fail to add second animal
         {
             SimpleDate date = new SimpleDate(9, 6, 1995);
             Animal animal = new Cat(13, date, "harry", "");
             Administration admin = new Administration();
-            //bool a = admin.Add(animal);
-
+            admin.Add(animal);
             Animal animalTwo = new Dog(13, date, "HarryTwo", date);
             bool b = admin.Add(animalTwo);
 
-            Assert.AreNotEqual(a, b); //assert.isfalse(b)
+            Assert.IsFalse(b); //assert.isfalse(b)
             //collection
             //eerst test schrijven, dan code.
             //simple, simple, simple
@@ -111,9 +110,9 @@ namespace AnimalTesting
             Animal animalc = new Dog(55000, new SimpleDate(9, 8, 1995), "Harry", new SimpleDate(9, 6, 2018));
             admin.Add(animalc);
 
-            Assert.AreEqual(200, animalb.GetPrice());
-            Assert.AreEqual(60, animala.GetPrice());
-            Assert.AreEqual(350, animalc.GetPrice());
+            Assert.AreEqual(200, animalb.Price);
+            Assert.AreEqual(60, animala.Price);
+            Assert.AreEqual(350, animalc.Price);
         }
 
         [TestMethod]

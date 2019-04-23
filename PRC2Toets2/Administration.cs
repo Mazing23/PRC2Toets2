@@ -8,35 +8,34 @@ namespace PRC2Toets2
 {
     public class Administration
     {
-        private List<Animal> allAnimals;
-        //auto properties
-        //backingfiels/calculated !!!!!!!!!!!!
+        private readonly List<Animal> allAnimals = new List<Animal>();
+        public List<Animal> AllAnimals { get { return this.allAnimals; } private set {; } }
 
         public Administration()
         {
-            allAnimals = new List<Animal>();
+            AllAnimals = new List<Animal>();
         }
 
         public bool Add(Animal animal)
         {
-            foreach (Animal a in allAnimals)
+            foreach (Animal a in AllAnimals)
             {
                 if (a.ChipRegistrationNumber == animal.ChipRegistrationNumber)
                 {
                     return false;
                 }
             }
-            allAnimals.Add(animal);
+            AllAnimals.Add(animal);
             return true;
         }
 
         public bool RemoveAnimal(int chipRegistrationNumber)
         {
-            foreach (Animal a in allAnimals)
+            foreach (Animal a in AllAnimals)
             {
                 if (a.ChipRegistrationNumber == chipRegistrationNumber)
                 {
-                    allAnimals.Remove(a);
+                    AllAnimals.Remove(a);
                     return true;
                 }
             }
@@ -45,7 +44,7 @@ namespace PRC2Toets2
 
         public Animal FindAnimal(int chipRegistrationNumber)
         {
-            foreach (Animal a in allAnimals)
+            foreach (Animal a in AllAnimals)
             {
                 if (a.ChipRegistrationNumber == chipRegistrationNumber)
                 {
