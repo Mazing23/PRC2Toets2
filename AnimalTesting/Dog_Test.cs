@@ -22,7 +22,7 @@ namespace AnimalTesting
         }
 
         [TestMethod]
-        public void Price_WillBe_HighBasedOn_ID_Number()
+        public void Price_WillBe_High_BasedOn_Chip_Number()
         {
             admin.Add(animalc);
             decimal price = animalc.Price;
@@ -30,7 +30,7 @@ namespace AnimalTesting
         }
 
         [TestMethod]
-        public void Price_WillBe_LowBasedOn_ID_Number()
+        public void Price_WillBe_Low_BasedOn_Chip_Number()
         {
             admin.Add(animala);
             decimal price = animala.Price;
@@ -38,7 +38,7 @@ namespace AnimalTesting
         }
 
         [TestMethod]
-        public void Price_WillNotBe_EqualBased_ID_Number()
+        public void Price_WillNotBe_Equal_and_WillNotMatch_LowBased_AnimalChip()
         {
             admin.Add(animala);
             admin.Add(animalc);

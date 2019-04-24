@@ -38,14 +38,14 @@ namespace AnimalTesting
         }
 
         [TestMethod]
-        public void Remove_WillReturnFalseWhenAnimalNotPresent()
+        public void Remove_Returns_False_WhenAnimalNotPresent_to_Remove()
         {
             bool result = admin.RemoveAnimal(13);
             Assert.IsFalse(result);
         }
 
         [TestMethod]
-        public void Remove_WillRemoveAnimalFromList()
+        public void Remove_Returns_True_IfAnimal_is_Removed_and_RemovesAnimalFromList()
         {
             admin.Add(animala);
             bool result = admin.RemoveAnimal(animala.ChipRegistrationNumber);
@@ -55,20 +55,21 @@ namespace AnimalTesting
         }
 
         [TestMethod]
-        public void FindAnimal_ReturnsAnimalWith_ID_Number()
+        public void FindAnimal_AnimalDoesExist_ReturnsAnimalWith_Chip_Number()
         {
             admin.Add(animala);
             Assert.AreEqual(admin.FindAnimal(13), animala);
         }
 
         [TestMethod]
-        public void FindAnimal_ReturnsNullWith_ID_Number()
+        public void FindAnimal_AnimalDoesNotExist_ReturnsNullWith_Chip_Number()
         {
+            admin.Add(animala);
             Assert.AreEqual(admin.FindAnimal(12), null);
         }
 
         [TestMethod]
-        public void Test_Animal_Will_Change_Number()
+        public void Add_AnimalWhillChangeNumber_and_notAllowDuplicateChipAdded()
         {
             admin.Add(animala);
             admin.Add(animalb);
@@ -83,6 +84,8 @@ namespace AnimalTesting
             }
 
             Assert.AreEqual(16, animale.ChipRegistrationNumber);
+            Assert.AreEqual(animale, admin.FindAnimal(16));
+            CollectionAssert.Contains(admin.AllAnimals, animale);
         }
 
     }

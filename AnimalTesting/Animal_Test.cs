@@ -29,13 +29,13 @@ namespace AnimalTesting
         }
 
         [TestMethod]
-        public void Test_AnimalList_First()
+        public void Animal_AllAnimals_CheckFirstAdded_is_FirstInList()
         {
             Assert.AreEqual(admin.AllAnimals[0], animala);
         }
 
         [TestMethod]
-        public void Test_CompareTo_Sort_List()
+        public void Animal_AllAnimals_SortAnimalList_and_CheckIfFirst_has_LowestChip()
         {
             admin.AllAnimals.Sort();
             Assert.AreEqual(admin.AllAnimals[0], animalc);
