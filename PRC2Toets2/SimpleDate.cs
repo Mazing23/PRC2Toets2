@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PRC2Toets2
 {
+    [Serializable]
     public class SimpleDate
     {
         private DateTime date;

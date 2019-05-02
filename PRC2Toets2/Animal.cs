@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Binary;
+
 
 namespace PRC2Toets2
 {
+    [Serializable]
     public abstract class Animal : IComparable<Animal>, ISellable
     {
         public int ChipRegistrationNumber { get; private set; }

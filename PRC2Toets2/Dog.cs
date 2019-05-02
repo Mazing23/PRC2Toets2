@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PRC2Toets2
 {
+    [Serializable]
     public class Dog : Animal
     {
         public SimpleDate LastWalkDate { get; set; }

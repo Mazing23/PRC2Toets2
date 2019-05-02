@@ -26,9 +26,27 @@ namespace PRC2Toets2
             AnimalDump();
             UpdateListBox();
         }
-        
 
-        
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            string filename = @"D:\Persoonlijk\AllAnimalsInAdmin.txt";
+            admin.Save(filename);
+        }
+
+        private void ButtonLoad_Click(object sender, EventArgs e)
+        {
+            string filename = @"D:\Persoonlijk\AllAnimalsInAdmin.txt";
+            admin.Load(filename);
+            UpdateListBox();
+        }
+
+        private void ButtonExport_Click(object sender, EventArgs e)
+        {
+            string filename = @"D:\Persoonlijk\AnimalDump.txt";
+            admin.Export(filename);
+        }
+
+
         private void UpdateListBox()
         {
             listBoxAnimalsNotReserved.Items.Clear();
@@ -245,6 +263,7 @@ namespace PRC2Toets2
             four.IsReserved = true;
             five.IsReserved = false;
         }
-       
+
+        
     }
 }

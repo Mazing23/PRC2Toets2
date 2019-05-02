@@ -30,7 +30,6 @@
         {
             this.buttonSell = new System.Windows.Forms.Button();
             this.buttonUnReserve = new System.Windows.Forms.Button();
-            this.ButtonReserve = new System.Windows.Forms.Button();
             this.Reserved = new System.Windows.Forms.Label();
             this.listBoxAnimalsReserved = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -51,6 +50,10 @@
             this.animalTypeComboBox = new System.Windows.Forms.ComboBox();
             this.createAnimalButton = new System.Windows.Forms.Button();
             this.buttonShowinfo = new System.Windows.Forms.Button();
+            this.ButtonReserve = new System.Windows.Forms.Button();
+            this.ButtonLoad = new System.Windows.Forms.Button();
+            this.ButtonSave = new System.Windows.Forms.Button();
+            this.ButtonExport = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,17 +77,6 @@
             this.buttonUnReserve.Text = "Unreserve";
             this.buttonUnReserve.UseVisualStyleBackColor = true;
             this.buttonUnReserve.Click += new System.EventHandler(this.buttonUnReserve_Click);
-            // 
-            // ButtonReserve
-            // 
-            this.ButtonReserve.Location = new System.Drawing.Point(582, 380);
-            this.ButtonReserve.Margin = new System.Windows.Forms.Padding(2);
-            this.ButtonReserve.Name = "ButtonReserve";
-            this.ButtonReserve.Size = new System.Drawing.Size(102, 31);
-            this.ButtonReserve.TabIndex = 44;
-            this.ButtonReserve.Text = "Reserve";
-            this.ButtonReserve.UseVisualStyleBackColor = true;
-            this.ButtonReserve.Click += new System.EventHandler(this.ButtonReserve_Click);
             // 
             // Reserved
             // 
@@ -293,11 +285,58 @@
             this.buttonShowinfo.UseVisualStyleBackColor = true;
             this.buttonShowinfo.Click += new System.EventHandler(this.buttonShowinfo_Click);
             // 
+            // ButtonReserve
+            // 
+            this.ButtonReserve.Location = new System.Drawing.Point(582, 380);
+            this.ButtonReserve.Margin = new System.Windows.Forms.Padding(2);
+            this.ButtonReserve.Name = "ButtonReserve";
+            this.ButtonReserve.Size = new System.Drawing.Size(102, 31);
+            this.ButtonReserve.TabIndex = 44;
+            this.ButtonReserve.Text = "Reserve";
+            this.ButtonReserve.UseVisualStyleBackColor = true;
+            this.ButtonReserve.Click += new System.EventHandler(this.ButtonReserve_Click);
+            // 
+            // ButtonLoad
+            // 
+            this.ButtonLoad.Location = new System.Drawing.Point(961, 457);
+            this.ButtonLoad.Margin = new System.Windows.Forms.Padding(2);
+            this.ButtonLoad.Name = "ButtonLoad";
+            this.ButtonLoad.Size = new System.Drawing.Size(102, 31);
+            this.ButtonLoad.TabIndex = 49;
+            this.ButtonLoad.Text = "Load";
+            this.ButtonLoad.UseVisualStyleBackColor = true;
+            this.ButtonLoad.Click += new System.EventHandler(this.ButtonLoad_Click);
+            // 
+            // ButtonSave
+            // 
+            this.ButtonSave.Location = new System.Drawing.Point(846, 457);
+            this.ButtonSave.Margin = new System.Windows.Forms.Padding(2);
+            this.ButtonSave.Name = "ButtonSave";
+            this.ButtonSave.Size = new System.Drawing.Size(102, 31);
+            this.ButtonSave.TabIndex = 50;
+            this.ButtonSave.Text = "Save";
+            this.ButtonSave.UseVisualStyleBackColor = true;
+            this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            // 
+            // ButtonExport
+            // 
+            this.ButtonExport.Location = new System.Drawing.Point(663, 457);
+            this.ButtonExport.Margin = new System.Windows.Forms.Padding(2);
+            this.ButtonExport.Name = "ButtonExport";
+            this.ButtonExport.Size = new System.Drawing.Size(102, 31);
+            this.ButtonExport.TabIndex = 51;
+            this.ButtonExport.Text = "Export";
+            this.ButtonExport.UseVisualStyleBackColor = true;
+            this.ButtonExport.Click += new System.EventHandler(this.ButtonExport_Click);
+            // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1078, 499);
+            this.Controls.Add(this.ButtonExport);
+            this.Controls.Add(this.ButtonSave);
+            this.Controls.Add(this.ButtonLoad);
             this.Controls.Add(this.buttonShowinfo);
             this.Controls.Add(this.buttonSell);
             this.Controls.Add(this.buttonUnReserve);
@@ -322,7 +361,6 @@
         #endregion
         private System.Windows.Forms.Button buttonSell;
         private System.Windows.Forms.Button buttonUnReserve;
-        private System.Windows.Forms.Button ButtonReserve;
         private System.Windows.Forms.Label Reserved;
         private System.Windows.Forms.ListBox listBoxAnimalsReserved;
         private System.Windows.Forms.Label label4;
@@ -343,6 +381,10 @@
         private System.Windows.Forms.ComboBox animalTypeComboBox;
         private System.Windows.Forms.Button createAnimalButton;
         private System.Windows.Forms.Button buttonShowinfo;
+        private System.Windows.Forms.Button ButtonReserve;
+        private System.Windows.Forms.Button ButtonLoad;
+        private System.Windows.Forms.Button ButtonSave;
+        private System.Windows.Forms.Button ButtonExport;
     }
 }
 

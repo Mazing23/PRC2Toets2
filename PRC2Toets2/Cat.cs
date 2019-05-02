@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PRC2Toets2
 {
+    [Serializable]
     public class Cat : Animal
     {
         public string BadHabits { get; set; }
