@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace PRC2Toets2
         private Animal animal;
         private int maxNumberPets = 100000;
         Random newNumber = new Random();
+        private bool fileopened = false;
     
 
         public AdministrationForm()
@@ -29,21 +31,47 @@ namespace PRC2Toets2
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\Persoonlijk\AllAnimalsInAdmin.txt";
-            admin.Save(filename);
+            var folder = new FolderBrowserDialog();
+            DialogResult resultfolder = folder.ShowDialog();
+
+            if (resultfolder == DialogResult.OK)
+            {
+                string foldername = folder.SelectedPath;
+                string combined = String.Concat(foldername, @"\SerializedAnimals.txt");
+                admin.Save(combined);
+            }
+            else if (resultfolder == DialogResult.Cancel) return;
+
         }
 
         private void ButtonLoad_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\Persoonlijk\AllAnimalsInAdmin.txt";
-            admin.Load(filename);
+            var folder = new FolderBrowserDialog();
+            DialogResult resultfolder = folder.ShowDialog();
+
+            if (resultfolder == DialogResult.OK)
+            {
+                string foldername = folder.SelectedPath;
+                admin.Load(foldername);
+            }
+            else if (resultfolder == DialogResult.Cancel) return;
+
             UpdateListBox();
         }
 
         private void ButtonExport_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\Persoonlijk\AnimalDump.txt";
-            admin.Export(filename);
+            var folder = new FolderBrowserDialog();
+            DialogResult resultfolder = folder.ShowDialog();
+
+            if (resultfolder == DialogResult.OK)
+            {
+                string foldername = folder.SelectedPath;
+                string combined = String.Concat(foldername, @"\AnimalDump.txt");
+                admin.Export(combined);
+            }
+            else if (resultfolder == DialogResult.Cancel) return;
+
         }
 
 

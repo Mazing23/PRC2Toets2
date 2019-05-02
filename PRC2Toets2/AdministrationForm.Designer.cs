@@ -54,6 +54,8 @@
             this.ButtonLoad = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.ButtonExport = new System.Windows.Forms.Button();
+            this.browseFolder = new System.Windows.Forms.FolderBrowserDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -329,6 +331,10 @@
             this.ButtonExport.UseVisualStyleBackColor = true;
             this.ButtonExport.Click += new System.EventHandler(this.ButtonExport_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -385,6 +391,8 @@
         private System.Windows.Forms.Button ButtonLoad;
         private System.Windows.Forms.Button ButtonSave;
         private System.Windows.Forms.Button ButtonExport;
+        private System.Windows.Forms.FolderBrowserDialog browseFolder;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
