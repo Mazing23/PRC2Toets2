@@ -17,7 +17,6 @@ namespace PRC2Toets2
         private Animal animal;
         private int maxNumberPets = 100000;
         Random newNumber = new Random();
-        private bool fileopened = false;
     
 
         public AdministrationForm()
@@ -31,7 +30,7 @@ namespace PRC2Toets2
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            var folder = new FolderBrowserDialog();
+            FolderBrowserDialog folder = new FolderBrowserDialog();
             DialogResult resultfolder = folder.ShowDialog();
 
             if (resultfolder == DialogResult.OK)
@@ -39,6 +38,7 @@ namespace PRC2Toets2
                 string foldername = folder.SelectedPath;
                 string combined = String.Concat(foldername, @"\SerializedAnimals.txt");
                 admin.Save(combined);
+                MessageBox.Show(String.Format("File saved as {0}", combined), "Succes!");
             }
             else if (resultfolder == DialogResult.Cancel) return;
 
@@ -46,13 +46,14 @@ namespace PRC2Toets2
 
         private void ButtonLoad_Click(object sender, EventArgs e)
         {
-            var folder = new FolderBrowserDialog();
+            FolderBrowserDialog folder = new FolderBrowserDialog();
             DialogResult resultfolder = folder.ShowDialog();
 
             if (resultfolder == DialogResult.OK)
             {
                 string foldername = folder.SelectedPath;
                 admin.Load(foldername);
+                MessageBox.Show(String.Format("Load of current file: {0}", foldername));
             }
             else if (resultfolder == DialogResult.Cancel) return;
 
@@ -61,7 +62,7 @@ namespace PRC2Toets2
 
         private void ButtonExport_Click(object sender, EventArgs e)
         {
-            var folder = new FolderBrowserDialog();
+            FolderBrowserDialog folder = new FolderBrowserDialog();
             DialogResult resultfolder = folder.ShowDialog();
 
             if (resultfolder == DialogResult.OK)
@@ -69,6 +70,7 @@ namespace PRC2Toets2
                 string foldername = folder.SelectedPath;
                 string combined = String.Concat(foldername, @"\AnimalDump.txt");
                 admin.Export(combined);
+                MessageBox.Show(String.Format("Exported file saved as {0}", combined), "Succes!");
             }
             else if (resultfolder == DialogResult.Cancel) return;
 
