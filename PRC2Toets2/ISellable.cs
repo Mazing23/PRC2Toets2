@@ -8,7 +8,7 @@ namespace PRC2Toets2
 {
     interface ISellable
     {
-        decimal Price { get; } // set to go
+        decimal Price { get; } 
 
     }
 }

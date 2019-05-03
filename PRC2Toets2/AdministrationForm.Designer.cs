@@ -56,6 +56,7 @@
             this.ButtonExport = new System.Windows.Forms.Button();
             this.browseFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -393,6 +394,7 @@
         private System.Windows.Forms.Button ButtonExport;
         private System.Windows.Forms.FolderBrowserDialog browseFolder;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

@@ -25,20 +25,21 @@ namespace PRC2Toets2
             animalTypeComboBox.SelectedIndex = 0;
             admin = new Administration();
             AnimalDump();
+            SecondAnimalDump();
             UpdateListBox();
         }
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog folder = new FolderBrowserDialog();
+            SaveFileDialog folder = new SaveFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
 
             if (resultfolder == DialogResult.OK)
             {
-                string foldername = folder.SelectedPath;
-                string combined = String.Concat(foldername, @"\SerializedAnimals.txt");
-                admin.Save(combined);
-                MessageBox.Show(String.Format("File saved as {0}", combined), "Succes!");
+                string foldername = folder.FileName;
+                foldername = string.Concat(foldername, ".txt");
+                admin.Save(foldername);
+                MessageBox.Show(String.Format("File saved as {0}", foldername), "Succes!");
             }
             else if (resultfolder == DialogResult.Cancel) return;
 
@@ -46,12 +47,12 @@ namespace PRC2Toets2
 
         private void ButtonLoad_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog folder = new FolderBrowserDialog();
+            OpenFileDialog folder = new OpenFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
 
             if (resultfolder == DialogResult.OK)
             {
-                string foldername = folder.SelectedPath;
+                string foldername = folder.FileName;
                 admin.Load(foldername);
                 MessageBox.Show(String.Format("Load of current file: {0}", foldername));
             }
@@ -62,13 +63,14 @@ namespace PRC2Toets2
 
         private void ButtonExport_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog folder = new FolderBrowserDialog();
+
+            SaveFileDialog folder = new SaveFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
 
             if (resultfolder == DialogResult.OK)
             {
-                string foldername = folder.SelectedPath;
-                string combined = String.Concat(foldername, @"\AnimalDump.txt");
+                string foldername = folder.FileName;
+                string combined = String.Concat(foldername, ".txt");
                 admin.Export(combined);
                 MessageBox.Show(String.Format("Exported file saved as {0}", combined), "Succes!");
             }
@@ -286,6 +288,25 @@ namespace PRC2Toets2
             Animal four = new Dog(98, new SimpleDate(6, 5, 2013), "Kinga", new SimpleDate(1, 1, 1980));
             admin.Add(four);
             Animal five = new Dog(55412, new SimpleDate(17, 12, 2016), "Bijke", new SimpleDate(1, 1, 1980));
+            admin.Add(five);
+            one.IsReserved = true;
+            two.IsReserved = false;
+            three.IsReserved = true;
+            four.IsReserved = true;
+            five.IsReserved = false;
+        }
+
+        private void SecondAnimalDump()
+        {
+            Animal one = new Cat(45, new SimpleDate(1, 04, 2018), "Piet", "");
+            admin.Add(one);
+            Animal two = new Cat(2, new SimpleDate(12, 8, 2014), "Piet", "");
+            admin.Add(two);
+            Animal three = new Cat(1, new SimpleDate(21, 11, 2016), "Piet", "");
+            admin.Add(three);
+            Animal four = new Dog(5, new SimpleDate(6, 5, 2013), "Piet", new SimpleDate(1, 1, 1980));
+            admin.Add(four);
+            Animal five = new Dog(89, new SimpleDate(17, 12, 2016), "Piet", new SimpleDate(1, 1, 1980));
             admin.Add(five);
             one.IsReserved = true;
             two.IsReserved = false;
