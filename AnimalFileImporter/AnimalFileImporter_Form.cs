@@ -47,13 +47,15 @@ namespace AnimalFileImporter
             if (File.Exists(filename))
             {
                 string lines;
-                StreamReader reader = new StreamReader(filename);
-                List<string> animal = new List<string>();
-                while (!reader.EndOfStream)
+                using (StreamReader reader = new StreamReader(filename))
                 {
-                    while((lines = reader.ReadLine()) != null)
+                    List<string> animal = new List<string>();
+                    while (!reader.EndOfStream)
                     {
-                        allAnimals.Add(lines);
+                        while ((lines = reader.ReadLine()) != null)
+                        {
+                            allAnimals.Add(lines);
+                        }
                     }
                 }
             }
