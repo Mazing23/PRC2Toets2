@@ -79,5 +79,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PRC2Toets2\AnimalShelter.csproj">
+      <Project>{1CF04338-1364-4340-8FB0-6A885232BF84}</Project>
+      <Name>AnimalShelter</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

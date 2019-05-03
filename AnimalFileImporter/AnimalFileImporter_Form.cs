@@ -1,4 +1,5 @@
-﻿using PRC2Toets2;
+﻿
+using PRC2Toets2;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,8 +64,16 @@ namespace AnimalFileImporter
             foreach (string s in allAnimals)
             {
                 string first = (s.Split(':')[0]);
-                if (first == "Cat") lbCats.Items.Add(s);
-                if (first == "Dog") lbDogs.Items.Add(s);
+                if (first == "Cat")
+                {
+                    string[] features = s.Split(',');
+                    lbCats.Items.Add(String.Concat(features[0], ",  name: ",features[2], ",  bd: ", features[1], ",  bh: ",  features[5]));
+                }
+                if (first == "Dog") 
+                {
+                    string[] features = s.Split(',');
+                    lbDogs.Items.Add(String.Concat(features[0], ",  name: ", features[2], ",  bd: ", features[1]));
+                }
             }
         }
 

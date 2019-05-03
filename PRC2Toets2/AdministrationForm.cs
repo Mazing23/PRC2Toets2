@@ -37,7 +37,10 @@ namespace PRC2Toets2
             if (resultfolder == DialogResult.OK)
             {
                 string foldername = folder.FileName;
-                foldername = string.Concat(foldername, ".txt");
+                if (foldername.Substring(foldername.Length - 4) != ".txt")
+                {
+                    foldername = String.Concat(foldername, ".txt");
+                }
                 admin.Save(foldername);
                 MessageBox.Show(String.Format("File saved as {0}", foldername), "Succes!");
             }
@@ -66,13 +69,17 @@ namespace PRC2Toets2
 
             SaveFileDialog folder = new SaveFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
+            folder.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
 
             if (resultfolder == DialogResult.OK)
             {
                 string foldername = folder.FileName;
-                string combined = String.Concat(foldername, ".txt");
-                admin.Export(combined);
-                MessageBox.Show(String.Format("Exported file saved as {0}", combined), "Succes!");
+                if (foldername.Substring(foldername.Length - 4) != ".txt")
+                {
+                    foldername = String.Concat(foldername, ".txt");
+                }
+                admin.Export(foldername);
+                MessageBox.Show(String.Format("Exported file saved as {0}", foldername), "Succes!");
             }
             else if (resultfolder == DialogResult.Cancel) return;
 
@@ -279,9 +286,9 @@ namespace PRC2Toets2
 
         private void AnimalDump()
         {
-            Animal one = new Cat(34509, new SimpleDate(1, 04, 2018), "Klaartje", "");
+            Animal one = new Cat(34509, new SimpleDate(1, 04, 2018), "Klaartje", "Bites");
             admin.Add(one);
-            Animal two = new Cat(230, new SimpleDate(12, 8, 2014), "Puck", "");
+            Animal two = new Cat(230, new SimpleDate(12, 8, 2014), "Puck", "Howls");
             admin.Add(two);
             Animal three = new Cat(1298, new SimpleDate(21, 11, 2016), "Bor", "");
             admin.Add(three);
