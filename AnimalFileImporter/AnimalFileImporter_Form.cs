@@ -38,7 +38,7 @@ namespace AnimalFileImporter
         private void buttonImport_Click(object sender, EventArgs e)
         {
             string result = ChooseFolderPath();
-            if (result == null) throw new ArgumentNullException(nameof(result));
+            if (result == null) MessageBox.Show("No file was selected for importation");
             CheckContentsFile(result);
         }
 
