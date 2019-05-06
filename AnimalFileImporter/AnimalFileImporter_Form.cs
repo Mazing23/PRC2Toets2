@@ -44,7 +44,7 @@ namespace AnimalFileImporter
             CheckContentsFile(result);
         }
 
-        private void CheckContentsFile(string filename)
+        public void CheckContentsFile(string filename)
         {
             try
             {
@@ -89,23 +89,5 @@ namespace AnimalFileImporter
             }
         }
 
-        private void buttonFind_Click(object sender, EventArgs e)
-        {
-            //string filename = txtFilename.Text;
-            //try
-            //{
-            //    string[] dirs = Directory.GetDirectories(@"c:\", "p*");
-            //    foreach (string d in dirs)
-            //    {
-            //        if (d == null) throw new ArgumentNullException(d);
-            //        //CheckContentsFile(d);
-            //        MessageBox.Show(d);
-            //    }
-            //}
-            //catch (ArgumentNullException ex)
-            //{
-            //    MessageBox.Show("No directories found\n" + ex.Message);
-            //}
-        }
     }
 }
