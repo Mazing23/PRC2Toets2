@@ -30,19 +30,23 @@ namespace PRC2Toets2
                     bin.Serialize(stream, AllAnimals);
                 }
             }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentNullException($"Null Argument Exception: {ex.Message}");
+            }
             catch (DirectoryNotFoundException ex)
             {
                throw new DirectoryNotFoundException($"Directory can not be found: {ex.Message}");
+            }
+            catch (SerializationException ex)
+            {
+                throw new SerializationException($"Serialization Exception: {ex.Message}");
             }
             catch (IOException ex)
             {
                 throw new IOException($"IO Excepttion: {ex.Message}");
             }
-            catch (ArgumentNullException ex)
-            {
-                throw new ArgumentNullException($"Null Argument Exception: {ex.Message}");
-            }
-
+            
         }
 
         public void Load(string fileName)
@@ -58,21 +62,21 @@ namespace PRC2Toets2
                     animals = bin.Deserialize(stream) as List<Animal>;
                 }
             }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentNullException($"Null Argument Exception: {ex.Message}");
+            }
             catch (DirectoryNotFoundException ex)
             {
                 throw new DirectoryNotFoundException($"Directory can not be found: {ex.Message}");
-            }
-            catch (IOException ex)
-            {
-                throw new IOException($"IO Excepttion: {ex.Message}");
             }
             catch (SerializationException ex)
             {
                 throw new SerializationException($"Serialization Exception: {ex.Message}");
             }
-            catch (ArgumentNullException ex)
+            catch (IOException ex)
             {
-                throw new ArgumentNullException($"Null Argument Exception: {ex.Message}");
+                throw new IOException($"IO Excepttion: {ex.Message}");
             }
 
             foreach (Animal a in animals)
@@ -94,6 +98,10 @@ namespace PRC2Toets2
                     }
                 }
             }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentNullException($"Null Argument Exception: {ex.Message}");
+            }
             catch (DirectoryNotFoundException ex)
             {
                 throw new DirectoryNotFoundException($"Directory can not be found: {ex.Message}");
@@ -102,16 +110,13 @@ namespace PRC2Toets2
             {
                 throw new IOException($"IO Excepttion: {ex.Message}");
             }
-            catch (ArgumentNullException ex)
-            {
-                throw new ArgumentNullException($"Null Argument Exception: {ex.Message}");
-            }
         }
 
 
 
         public bool Add(Animal animal)
         {
+            if (animal == null) return false;
             foreach (Animal a in AllAnimals)
             {
                 if (a.ChipRegistrationNumber == animal.ChipRegistrationNumber)
