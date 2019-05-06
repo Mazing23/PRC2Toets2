@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 
 namespace AnimalFileImporter
 {
@@ -40,25 +42,51 @@ namespace AnimalFileImporter
         {
             string result = ChooseFolderPath();
             if (result == null) MessageBox.Show("No file was selected for importation");
-            CheckContentsFile(result);
+            try
+            {
+                CheckContentsFile(result);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                MessageBox.Show($"Directory not found: {ex.Message}");
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"IO Exception: {ex.Message}");
+            }
+            catch(ArgumentNullException ex)
+            {
+                MessageBox.Show($"No file was selected for importation: {ex.Message}");
+            }
         }
 
         private void CheckContentsFile(string filename)
         {
-            if (File.Exists(filename))
+            try
             {
-                string lines;
-                using (StreamReader reader = new StreamReader(filename))
+                if (File.Exists(filename))
                 {
-                    List<string> animal = new List<string>();
-                    while (!reader.EndOfStream)
+                    string lines;
+                    using (StreamReader reader = new StreamReader(filename))
                     {
-                        while ((lines = reader.ReadLine()) != null)
+                        List<string> animal = new List<string>();
+                        while (!reader.EndOfStream)
                         {
-                            allAnimals.Add(lines);
+                            while ((lines = reader.ReadLine()) != null)
+                            {
+                                allAnimals.Add(lines);
+                            }
                         }
                     }
                 }
+            }
+            catch (SerializationException ex)
+            {
+                MessageBox.Show($"Could not Serialize: {ex.Message}");
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"IO Exception: {ex.Message}");
             }
 
             foreach (string s in allAnimals)

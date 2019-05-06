@@ -22,31 +22,19 @@ namespace PRC2Toets2
 
         public void Save(string fileName)
         {
-            try
-            {
                 using (Stream stream = File.Open(fileName, FileMode.Create))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
                     bin.Serialize(stream, AllAnimals);
                 }
-            }
-            catch (IOException ex)
-            {
-                throw new IOException(ex.ToString());
-            }
-            catch (SerializationException ex)
-            {
-                throw new SerializationException("Serializing did not go succesfull: " + ex.Message);
-            }
+
         }
 
         public void Load(string fileName)
         {
             AllAnimals.Clear();
             List<Animal> animals = null;
-            
-            try
-            {
+
                 using (FileStream stream = new FileStream(fileName, FileMode.Open))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
@@ -55,35 +43,19 @@ namespace PRC2Toets2
                 foreach (Animal a in animals)
                 {
                     AllAnimals.Add(a);
-                }
-            }
-            catch (IOException ex)
-            {
-                throw new IOException(ex.ToString());
-            }
-            catch (SerializationException ex)
-            {
-                throw new SerializationException("Serializing did not go succesfull: " + ex.Message);
-            }
+                }         
 
         }
 
         public void Export(string fileName)
         {
-            try
-            {
-                using (StreamWriter stream = new StreamWriter(fileName))
+             using (StreamWriter stream = new StreamWriter(fileName))
                 {
                     foreach (Animal a in AllAnimals)
                     {
                         stream.WriteLine(a.ToString());
                     }
                 }
-            }
-            catch (IOException ex)
-            {
-                throw new IOException(ex.ToString());
-            }
         }
 
 
