@@ -22,11 +22,30 @@ namespace PRC2Toets2
 
         public void Save(string fileName)
         {
+            try
+            {
                 using (Stream stream = File.Open(fileName, FileMode.Create))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
                     bin.Serialize(stream, AllAnimals);
                 }
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+               throw new DirectoryNotFoundException($"Directory can not be found: {ex.Message}");
+            }
+            catch (IOException ex)
+            {
+                throw new IOException($"IO Excepttion: {ex.Message}");
+            }
+            catch (SerializationException ex)
+            {
+                throw new SerializationException($"Serialization Exception: {ex.Message}");
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentNullException($"Null Argument Exception: {ex.Message}");
+            }
 
         }
 
@@ -35,12 +54,32 @@ namespace PRC2Toets2
             AllAnimals.Clear();
             List<Animal> animals = null;
 
+            try
+            {
                 using (FileStream stream = new FileStream(fileName, FileMode.Open))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
                     animals = bin.Deserialize(stream) as List<Animal>;
                 }
-                foreach (Animal a in animals)
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                throw new DirectoryNotFoundException($"Directory can not be found: {ex.Message}");
+            }
+            catch (IOException ex)
+            {
+                throw new IOException($"IO Excepttion: {ex.Message}");
+            }
+            catch (SerializationException ex)
+            {
+                throw new SerializationException($"Serialization Exception: {ex.Message}");
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentNullException($"Null Argument Exception: {ex.Message}");
+            }
+
+            foreach (Animal a in animals)
                 {
                     AllAnimals.Add(a);
                 }         
@@ -49,13 +88,32 @@ namespace PRC2Toets2
 
         public void Export(string fileName)
         {
-             using (StreamWriter stream = new StreamWriter(fileName))
+            try
+            {
+                using (StreamWriter stream = new StreamWriter(fileName))
                 {
                     foreach (Animal a in AllAnimals)
                     {
                         stream.WriteLine(a.ToString());
                     }
                 }
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                throw new DirectoryNotFoundException($"Directory can not be found: {ex.Message}");
+            }
+            catch (IOException ex)
+            {
+                throw new IOException($"IO Excepttion: {ex.Message}");
+            }
+            catch (SerializationException ex)
+            {
+                throw new SerializationException($"Serialization Exception: {ex.Message}");
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentNullException($"Null Argument Exception: {ex.Message}");
+            }
         }
 
 

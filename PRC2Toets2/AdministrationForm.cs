@@ -36,8 +36,6 @@ namespace PRC2Toets2
             SaveFileDialog folder = new SaveFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
 
-            try
-            {
                 if (resultfolder == DialogResult.OK)
                 {
                     string foldername = folder.FileName;
@@ -49,33 +47,13 @@ namespace PRC2Toets2
                     MessageBox.Show(String.Format("File saved as {0}", foldername), "Succes!");
                 }
                 else if (resultfolder == DialogResult.Cancel) return;
-            }
-            catch (SerializationException ex)
-            {
-                MessageBox.Show($"Could not Serialize: {ex.Message}");
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                MessageBox.Show($"Directory not found: {ex.Message}");
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show($"IO Exception: {ex.Message}");
-            }
-            catch (ArgumentNullException ex)
-            {
-                MessageBox.Show($"This is not a good location to save:{ex.Message}");
-            }
         }
 
         private void ButtonLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog folder = new OpenFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
-
-
-            try
-            {
+            
                 if (resultfolder == DialogResult.OK)
                 {
                     string foldername = folder.FileName;
@@ -83,24 +61,6 @@ namespace PRC2Toets2
                     MessageBox.Show(String.Format("Load of current file: {0}", foldername));
                 }
                 else if (resultfolder == DialogResult.Cancel) return;
-            }
-            catch (SerializationException ex)
-            {
-                MessageBox.Show($"Could not Serialize: {ex.Message}");
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                MessageBox.Show($"Directory not found: {ex.Message}");
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show($"IO Exception: {ex.Message}");
-            }
-            catch (ArgumentNullException ex)
-            {
-                MessageBox.Show($"This is file was not found:{ex.Message}");
-            }
-
             UpdateListBox();
         }
 
@@ -110,9 +70,7 @@ namespace PRC2Toets2
             SaveFileDialog folder = new SaveFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
             folder.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-
-            try
-            {
+            
                 if (resultfolder == DialogResult.OK)
                 {
                     string foldername = folder.FileName;
@@ -124,24 +82,6 @@ namespace PRC2Toets2
                     MessageBox.Show(String.Format("Exported file saved as {0}", foldername), "Succes!");
                 }
                 else if (resultfolder == DialogResult.Cancel) return;
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                MessageBox.Show($"Directory not found: {ex.Message}");
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show($"IO Exception: {ex.Message}");
-            }
-            catch (SerializationException ex)
-            {
-                MessageBox.Show($"Serializing did not go succesfull:{ex.Message}");
-            }
-            catch (ArgumentNullException ex)
-            {
-                MessageBox.Show($"This is not a good location to export:{ex.Message}");
-            }
-
         }
 
 

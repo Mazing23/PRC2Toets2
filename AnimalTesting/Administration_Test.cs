@@ -99,6 +99,8 @@ namespace AnimalTesting
         {
             string foldername = "C:\\Users\\Peter\\Documents\\School\\Animals.txt";
             admin.Save(foldername);
+            string foldernamedos = "C:\\Users\\Gijs\\Documents\\School\\Animals.txt";
+            admin.Load(foldernamedos);
         }
 
         [TestMethod]
