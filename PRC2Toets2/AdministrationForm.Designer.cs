@@ -336,10 +336,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.Filter = "\"Text File | *.txt\"";
-            // 
             // AdministrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);

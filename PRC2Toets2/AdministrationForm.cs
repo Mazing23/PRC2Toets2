@@ -26,7 +26,7 @@ namespace PRC2Toets2
             InitializeComponent();
             animalTypeComboBox.SelectedIndex = 0;
             admin = new Administration();
-            //AnimalDump();
+            AnimalDump();
             //SecondAnimalDump();
             UpdateListBox();
         }
@@ -36,31 +36,32 @@ namespace PRC2Toets2
             SaveFileDialog folder = new SaveFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
 
-                if (resultfolder == DialogResult.OK)
+            if (resultfolder == DialogResult.OK)
+            {
+                string foldername = folder.FileName;
+                if (foldername.Substring(foldername.Length - 4) != ".txt")
                 {
-                    string foldername = folder.FileName;
-                    if (foldername.Substring(foldername.Length - 4) != ".txt")
-                    {
-                        foldername = String.Concat(foldername, ".txt");
-                    }
-                    admin.Save(foldername);
-                    MessageBox.Show(String.Format("File saved as {0}", foldername), "Succes!");
+                    foldername = String.Concat(foldername, ".txt");
                 }
-                else if (resultfolder == DialogResult.Cancel) return;
+                admin.Save(foldername);
+                MessageBox.Show(String.Format("File saved as {0}", foldername), "Succes!");
+            }
+            else if (resultfolder == DialogResult.Cancel) return;
         }
 
         private void ButtonLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog folder = new OpenFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
-            
-                if (resultfolder == DialogResult.OK)
-                {
-                    string foldername = folder.FileName;
-                    admin.Load(foldername);
-                    MessageBox.Show(String.Format("Load of current file: {0}", foldername));
-                }
-                else if (resultfolder == DialogResult.Cancel) return;
+
+            if (resultfolder == DialogResult.OK)
+            {
+                string foldername = folder.FileName;
+                admin.Load(foldername);
+                MessageBox.Show(String.Format("Load of current file: {0}", foldername));
+            }
+            else if (resultfolder == DialogResult.Cancel) return;
+
             UpdateListBox();
         }
 
@@ -70,18 +71,18 @@ namespace PRC2Toets2
             SaveFileDialog folder = new SaveFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
             folder.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            
-                if (resultfolder == DialogResult.OK)
+
+            if (resultfolder == DialogResult.OK)
+            {
+                string foldername = folder.FileName;
+                if (foldername.Substring(foldername.Length - 4) != ".txt")
                 {
-                    string foldername = folder.FileName;
-                    if (foldername.Substring(foldername.Length - 4) != ".txt")
-                    {
-                        foldername = String.Concat(foldername, ".txt");
-                    }
-                    admin.Export(foldername);
-                    MessageBox.Show(String.Format("Exported file saved as {0}", foldername), "Succes!");
+                    foldername = String.Concat(foldername, ".txt");
                 }
-                else if (resultfolder == DialogResult.Cancel) return;
+                admin.Export(foldername);
+                MessageBox.Show(String.Format("Exported file saved as {0}", foldername), "Succes!");
+            }
+            else if (resultfolder == DialogResult.Cancel) return;
         }
 
 
@@ -118,42 +119,32 @@ namespace PRC2Toets2
 
         private void createAnimalButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                SimpleDate birthDate = new SimpleDate(birthdatePickerAnimal.Value.Day, birthdatePickerAnimal.Value.Month
+            SimpleDate birthDate = new SimpleDate(birthdatePickerAnimal.Value.Day, birthdatePickerAnimal.Value.Month
                        , birthdatePickerAnimal.Value.Year);
-                SimpleDate walkDate = new SimpleDate(lastWalkDate.Value.Day, lastWalkDate.Value.Month
-                    , lastWalkDate.Value.Year);
+            SimpleDate walkDate = new SimpleDate(lastWalkDate.Value.Day, lastWalkDate.Value.Month
+                , lastWalkDate.Value.Year);
 
-                string selectedAnimal = animalTypeComboBox.SelectedItem.ToString();
+            string selectedAnimal = animalTypeComboBox.SelectedItem.ToString();
 
-                if (string.IsNullOrWhiteSpace(animalNameTextBox.Text) || string.IsNullOrEmpty(animalNameTextBox.Text))
-                {
-                    MessageBox.Show("Geef dit arme beestje een naam!");
-                }
-
-                if (!string.IsNullOrWhiteSpace(animalNameTextBox.Text))
-                {
-                    string name = animalNameTextBox.Text;
-                    if (selectedAnimal == "Cat")
-                    {
-                        string problems = problemsCatTextBox.Text;
-                        AddingCat(name, birthDate, problems);
-                    }
-                    if (selectedAnimal == "Dog")
-                    {
-                        AddingDog(name, birthDate, walkDate);
-                    }
-                }
-            }
-            catch (FormatException ex)
+            if (string.IsNullOrWhiteSpace(animalNameTextBox.Text) || string.IsNullOrEmpty(animalNameTextBox.Text))
             {
-                MessageBox.Show($"This item is not in the correct format:{ex.Message}");
+                MessageBox.Show("Geef dit arme beestje een naam!");
             }
-            catch(NoNullAllowedException ex)
+
+            if (!string.IsNullOrWhiteSpace(animalNameTextBox.Text))
             {
-                MessageBox.Show($"This item cannot be null {ex.Message}");
+                string name = animalNameTextBox.Text;
+                if (selectedAnimal == "Cat")
+                {
+                    string problems = problemsCatTextBox.Text;
+                    AddingCat(name, birthDate, problems);
+                }
+                if (selectedAnimal == "Dog")
+                {
+                    AddingDog(name, birthDate, walkDate);
+                }
             }
+
             UpdateListBox();
         }
 
