@@ -10,7 +10,11 @@ namespace PRC2Toets2
     public class Cat : Animal
     {
         public string BadHabits { get; set; }
-        public override decimal Price { get { decimal price = 60;
+        public override decimal Price
+        {
+            get
+            {
+                decimal price = 60;
                 if (BadHabits != null)
                 {
                     int length = BadHabits.Length;
@@ -20,7 +24,8 @@ namespace PRC2Toets2
                         price = 20;
                     }
                 }
-                return price; }
+                return price;
+            }
         } 
 
         public Cat(int chipRegistrationNumber, SimpleDate dateOfBirth,

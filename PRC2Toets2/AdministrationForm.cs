@@ -70,7 +70,7 @@ namespace PRC2Toets2
 
             SaveFileDialog folder = new SaveFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
-            folder.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            //folder.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
 
             if (resultfolder == DialogResult.OK)
             {

@@ -80,9 +80,9 @@ namespace PRC2Toets2
             }
 
             foreach (Animal a in animals)
-                {
-                    AllAnimals.Add(a);
-                }         
+            {
+                AllAnimals.Add(a);
+            }
 
         }
 

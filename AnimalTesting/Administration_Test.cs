@@ -176,8 +176,7 @@ namespace AnimalTesting
         [ExpectedException(typeof(SerializationException))]
         public void Administration_Load_SerializationException()
         {
-            string foldername = "C:\\Users\\Gijs\\Documents\\School\\yeet.txt";
-            admin.Load(foldername);
+            admin.Load(fileNameRegular);
         }
 
         [TestMethod]

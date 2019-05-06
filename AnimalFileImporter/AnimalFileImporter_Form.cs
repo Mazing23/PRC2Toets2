@@ -46,35 +46,22 @@ namespace AnimalFileImporter
         }
 
 
-
-
         private void CheckContentsFile(string filename)
         {
-            try
+            if (File.Exists(filename))
             {
-                if (File.Exists(filename))
+                string lines;
+                using (StreamReader reader = new StreamReader(filename))
                 {
-                    string lines;
-                    using (StreamReader reader = new StreamReader(filename))
+                    List<string> animal = new List<string>();
+                    while (!reader.EndOfStream)
                     {
-                        List<string> animal = new List<string>();
-                        while (!reader.EndOfStream)
+                        while ((lines = reader.ReadLine()) != null)
                         {
-                            while ((lines = reader.ReadLine()) != null)
-                            {
-                                allAnimals.Add(lines);
-                            }
+                            allAnimals.Add(lines);
                         }
                     }
                 }
-            }
-            catch (SerializationException ex)
-            {
-                MessageBox.Show($"Could not Serialize: {ex.Message}");
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show($"IO Exception: {ex.Message}");
             }
             foreach (string s in allAnimals)
             {

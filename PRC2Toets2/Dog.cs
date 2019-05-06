@@ -10,9 +10,13 @@ namespace PRC2Toets2
     public class Dog : Animal
     {
         public SimpleDate LastWalkDate { get; set; }
-        public override decimal Price { get {
+        public override decimal Price
+        {
+            get
+            {
                 if (ChipRegistrationNumber < 50000) return 200;
-                else return 350; }
+                else return 350;
+            }
         }
 
         public Dog(int chipRegistrationNumber, SimpleDate dateOfBirth,
