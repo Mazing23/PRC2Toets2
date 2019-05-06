@@ -10,7 +10,7 @@ namespace AnimalTesting
         Animal animala;
         Animal animalb;
         Animal animalc;
-
+         
         [TestInitialize]
         public void Setup()
         {

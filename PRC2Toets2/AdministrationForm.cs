@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 
 namespace PRC2Toets2
 {
@@ -24,8 +26,8 @@ namespace PRC2Toets2
             InitializeComponent();
             animalTypeComboBox.SelectedIndex = 0;
             admin = new Administration();
-            AnimalDump();
-            SecondAnimalDump();
+            //AnimalDump();
+            //SecondAnimalDump();
             UpdateListBox();
         }
 
@@ -34,18 +36,43 @@ namespace PRC2Toets2
             SaveFileDialog folder = new SaveFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
 
-            if (resultfolder == DialogResult.OK)
+            try
             {
-                string foldername = folder.FileName;
-                if (foldername.Substring(foldername.Length - 4) != ".txt")
+
+                if (resultfolder == DialogResult.OK)
                 {
-                    foldername = String.Concat(foldername, ".txt");
+                    string foldername = folder.FileName;
+                    if (foldername.Substring(foldername.Length - 4) != ".txt")
+                    {
+                        foldername = String.Concat(foldername, ".txt");
+                    }
+                    admin.Save(foldername);
+                    MessageBox.Show(String.Format("File saved as {0}", foldername), "Succes!");
                 }
+                else if (resultfolder == DialogResult.Cancel) return;
+            }
+            catch (SerializationException ex)
+            {
+                MessageBox.Show($"Could not Serialize: {ex.Message}");
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                MessageBox.Show($"Directory not found: {ex.Message}");
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"IO Exception: {ex.Message}");
+            }
+            catch (ArgumentNullException ex)
+            {
+                MessageBox.Show($"This is not a good location to save:{ex.Message}");
+
+                string foldername = folder.FileName;
+                foldername = string.Concat(foldername, ".txt");
                 admin.Save(foldername);
                 MessageBox.Show(String.Format("File saved as {0}", foldername), "Succes!");
-            }
-            else if (resultfolder == DialogResult.Cancel) return;
 
+            }
         }
 
         private void ButtonLoad_Click(object sender, EventArgs e)
@@ -53,13 +80,33 @@ namespace PRC2Toets2
             OpenFileDialog folder = new OpenFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
 
-            if (resultfolder == DialogResult.OK)
+
+            try
             {
-                string foldername = folder.FileName;
-                admin.Load(foldername);
-                MessageBox.Show(String.Format("Load of current file: {0}", foldername));
+                if (resultfolder == DialogResult.OK)
+                {
+                    string foldername = folder.FileName;
+                    admin.Load(foldername);
+                    MessageBox.Show(String.Format("Load of current file: {0}", foldername));
+                }
+                else if (resultfolder == DialogResult.Cancel) return;
             }
-            else if (resultfolder == DialogResult.Cancel) return;
+            catch (SerializationException ex)
+            {
+                MessageBox.Show($"Could not Serialize: {ex.Message}");
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                MessageBox.Show($"Directory not found: {ex.Message}");
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"IO Exception: {ex.Message}");
+            }
+            catch (ArgumentNullException ex)
+            {
+                MessageBox.Show($"This is file was not found:{ex.Message}");
+            }
 
             UpdateListBox();
         }
@@ -69,19 +116,44 @@ namespace PRC2Toets2
 
             SaveFileDialog folder = new SaveFileDialog();
             DialogResult resultfolder = folder.ShowDialog();
-            folder.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
 
-            if (resultfolder == DialogResult.OK)
+            try
             {
-                string foldername = folder.FileName;
-                if (foldername.Substring(foldername.Length - 4) != ".txt")
+
+                if (resultfolder == DialogResult.OK)
                 {
-                    foldername = String.Concat(foldername, ".txt");
+                    string foldername = folder.FileName;
+                    if (foldername.Substring(foldername.Length - 4) != ".txt")
+                    {
+                        foldername = String.Concat(foldername, ".txt");
+                    }
+                    admin.Export(foldername);
+                    MessageBox.Show(String.Format("Exported file saved as {0}", foldername), "Succes!");
                 }
-                admin.Export(foldername);
-                MessageBox.Show(String.Format("Exported file saved as {0}", foldername), "Succes!");
+                else if (resultfolder == DialogResult.Cancel) return;
             }
-            else if (resultfolder == DialogResult.Cancel) return;
+            catch (DirectoryNotFoundException ex)
+            {
+                MessageBox.Show($"Directory not found: {ex.Message}");
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"IO Exception: {ex.Message}");
+            }
+            catch (SerializationException ex)
+            {
+                MessageBox.Show($"Serializing did not go succesfull:{ex.Message}");
+            }
+            catch (ArgumentNullException ex)
+            {
+                MessageBox.Show($"This is not a good location to export:{ex.Message}");
+
+                string foldername = folder.FileName;
+                string combined = String.Concat(foldername, ".txt");
+                admin.Export(combined);
+                MessageBox.Show(String.Format("Exported file saved as {0}", combined), "Succes!");
+
+            }
 
         }
 
@@ -119,30 +191,41 @@ namespace PRC2Toets2
 
         private void createAnimalButton_Click(object sender, EventArgs e)
         {
-            SimpleDate birthDate = new SimpleDate(birthdatePickerAnimal.Value.Day, birthdatePickerAnimal.Value.Month
-                , birthdatePickerAnimal.Value.Year);
-            SimpleDate walkDate = new SimpleDate(lastWalkDate.Value.Day, lastWalkDate.Value.Month
-                , lastWalkDate.Value.Year);
-
-            string selectedAnimal = animalTypeComboBox.SelectedItem.ToString();
-
-            if (string.IsNullOrWhiteSpace(animalNameTextBox.Text) || string.IsNullOrEmpty(animalNameTextBox.Text))
+            try
             {
-                MessageBox.Show("Geef dit arme beestje een naam!");
+                SimpleDate birthDate = new SimpleDate(birthdatePickerAnimal.Value.Day, birthdatePickerAnimal.Value.Month
+                       , birthdatePickerAnimal.Value.Year);
+                SimpleDate walkDate = new SimpleDate(lastWalkDate.Value.Day, lastWalkDate.Value.Month
+                    , lastWalkDate.Value.Year);
+
+                string selectedAnimal = animalTypeComboBox.SelectedItem.ToString();
+
+                if (string.IsNullOrWhiteSpace(animalNameTextBox.Text) || string.IsNullOrEmpty(animalNameTextBox.Text))
+                {
+                    MessageBox.Show("Geef dit arme beestje een naam!");
+                }
+
+                if (!string.IsNullOrWhiteSpace(animalNameTextBox.Text))
+                {
+                    string name = animalNameTextBox.Text;
+                    if (selectedAnimal == "Cat")
+                    {
+                        string problems = problemsCatTextBox.Text;
+                        AddingCat(name, birthDate, problems);
+                    }
+                    if (selectedAnimal == "Dog")
+                    {
+                        AddingDog(name, birthDate, walkDate);
+                    }
+                }
             }
-
-            if (!string.IsNullOrWhiteSpace(animalNameTextBox.Text))
+            catch (FormatException ex)
             {
-                string name = animalNameTextBox.Text;
-                if (selectedAnimal == "Cat")
-                {
-                    string problems = problemsCatTextBox.Text;
-                    AddingCat(name, birthDate, problems);
-                }
-                if (selectedAnimal == "Dog")
-                {
-                    AddingDog(name, birthDate, walkDate);
-                }
+                MessageBox.Show($"This item is not in the correct format:{ex.Message}");
+            }
+            catch(NoNullAllowedException ex)
+            {
+                MessageBox.Show($"This item cannot be null {ex.Message}");
             }
             UpdateListBox();
         }
@@ -184,7 +267,7 @@ namespace PRC2Toets2
                 }
                 else if (result == DialogResult.No)
                 {
-                    walk = null;
+                    walkDate = null;
                 }
             }
             else
@@ -286,9 +369,9 @@ namespace PRC2Toets2
 
         private void AnimalDump()
         {
-            Animal one = new Cat(34509, new SimpleDate(1, 04, 2018), "Klaartje", "Bites");
+            Animal one = new Cat(34509, new SimpleDate(1, 04, 2018), "Klaartje", "");
             admin.Add(one);
-            Animal two = new Cat(230, new SimpleDate(12, 8, 2014), "Puck", "Howls");
+            Animal two = new Cat(230, new SimpleDate(12, 8, 2014), "Puck", "");
             admin.Add(two);
             Animal three = new Cat(1298, new SimpleDate(21, 11, 2016), "Bor", "");
             admin.Add(three);

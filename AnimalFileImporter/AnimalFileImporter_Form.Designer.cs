@@ -34,8 +34,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Files = new System.Windows.Forms.OpenFileDialog();
-            this.txtFilename = new System.Windows.Forms.TextBox();
-            this.buttonFind = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonImport
@@ -91,30 +89,11 @@
             this.Files.RestoreDirectory = true;
             this.Files.Title = "File Searching";
             // 
-            // txtFilename
-            // 
-            this.txtFilename.Location = new System.Drawing.Point(582, 43);
-            this.txtFilename.Name = "txtFilename";
-            this.txtFilename.Size = new System.Drawing.Size(234, 22);
-            this.txtFilename.TabIndex = 5;
-            // 
-            // buttonFind
-            // 
-            this.buttonFind.Location = new System.Drawing.Point(582, 80);
-            this.buttonFind.Name = "buttonFind";
-            this.buttonFind.Size = new System.Drawing.Size(234, 36);
-            this.buttonFind.TabIndex = 6;
-            this.buttonFind.Text = "Find File";
-            this.buttonFind.UseVisualStyleBackColor = true;
-            this.buttonFind.Click += new System.EventHandler(this.buttonFind_Click);
-            // 
             // AnimalFileImporter_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(827, 447);
-            this.Controls.Add(this.buttonFind);
-            this.Controls.Add(this.txtFilename);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbCats);
@@ -134,8 +113,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.OpenFileDialog Files;
-        private System.Windows.Forms.TextBox txtFilename;
-        private System.Windows.Forms.Button buttonFind;
     }
 }
 

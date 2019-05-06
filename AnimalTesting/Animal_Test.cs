@@ -1,6 +1,9 @@
 ﻿using System;
 using PRC2Toets2;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 
 namespace AnimalTesting
 {
@@ -47,8 +50,6 @@ namespace AnimalTesting
             Assert.IsTrue(animalb.IsReserved);
             Assert.IsFalse(animala.IsReserved);
         }
-
-
 
 
     }

@@ -1,5 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PRC2Toets2;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+using System;
 
 namespace AnimalTesting
 {
@@ -88,5 +92,101 @@ namespace AnimalTesting
             CollectionAssert.Contains(admin.AllAnimals, animale);
         }
 
+
+        [TestMethod]
+        [ExpectedException(typeof(DirectoryNotFoundException))]
+        public void Administration_Save_DirectoryException()
+        {
+            string foldername = "C:\\Users\\Peter\\Documents\\School\\Animals.txt";
+            admin.Save(foldername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IOException))]
+        public void Administration_Save_IOException()
+        {
+            string foldername = "C:\\Users\\Gijs\\Documents\\School\\Animals.txt";
+            admin.Save(foldername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(SerializationException))]
+        public void Administration_Save_SerializationException()
+        {
+            string foldername = "D:\\Users\\Gijs\\Documents\\School\\Animals.txt";
+            admin.Save(foldername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Administration_Save_ArgumentNullException()
+        {
+            string foldername = null;
+            admin.Save(foldername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DirectoryNotFoundException))]
+        public void Administration_Load_DirectoryException()
+        {
+            string foldername = "C:\\Users\\Peter\\Documents\\School\\Animals.txt";
+            admin.Load(foldername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IOException))]
+        public void Administration_Load_IOException()
+        {
+            string foldername = "D:\\Users\\Gijs\\Documents\\School\\Animals.txt";
+            admin.Load(foldername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(SerializationException))]
+        public void Administration_Load_SerializationException()
+        {
+            string foldername = "C:\\Users\\Gijs\\Documents\\School\\Animals.txt";
+            admin.Load(foldername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Administration_Load_ArgumentNullException()
+        {
+            string foldername = null;
+            admin.Load(foldername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DirectoryNotFoundException))]
+        public void Administration_Export_DirectoryException()
+        {
+            string foldername = "C:\\Users\\Peter\\Documents\\School\\Animals.txt";
+            admin.Export(foldername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IOException))]
+        public void Administration_Export_IOException()
+        {
+            string foldername = "D:\\Users\\Gijs\\Documents\\School\\Animals.txt";
+            admin.Export(foldername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(SerializationException))]
+        public void Administration_Export_SerializationException()
+        {
+            string foldername = "C:\\Users\\Gijs\\Documents\\School\\Animals.txt";
+            admin.Export(foldername);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Administration_Export_ArgumentNullException()
+        {
+            string foldername = null;
+            admin.Export(foldername);
+        }
     }
 }
