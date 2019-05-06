@@ -1,4 +1,5 @@
-﻿//using PRC2Toets2;
+﻿
+using PRC2Toets2;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,11 +42,25 @@ namespace AnimalFileImporter
         {
             string result = ChooseFolderPath();
             if (result == null) MessageBox.Show("No file was selected for importation");
-            CheckContentsFile(result);
-
+            try
+            {
+                CheckContentsFile(result);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                MessageBox.Show($"Directory not found: {ex.Message}");
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"IO Exception: {ex.Message}");
+            }
+            catch(ArgumentNullException ex)
+            {
+                MessageBox.Show($"No file was selected for importation: {ex.Message}");
+            }
         }
 
-        public void CheckContentsFile(string filename)
+        private void CheckContentsFile(string filename)
         {
             try
             {
@@ -64,15 +79,10 @@ namespace AnimalFileImporter
                         }
                     }
                 }
-                else
-                {
-                    MessageBox.Show("FileName given was not found, please try again");
-                }
-
             }
-            catch (DirectoryNotFoundException ex)
+            catch (SerializationException ex)
             {
-                MessageBox.Show($"Directory not found: {ex.Message}");
+                MessageBox.Show($"Could not Serialize: {ex.Message}");
             }
             catch (IOException ex)
             {
@@ -82,10 +92,36 @@ namespace AnimalFileImporter
             foreach (string s in allAnimals)
             {
                 string first = (s.Split(':')[0]);
-                if (first == "Cat") lbCats.Items.Add(s);
-                if (first == "Dog") lbDogs.Items.Add(s);
+                if (first == "Cat")
+                {
+                    string[] features = s.Split(',');
+                    lbCats.Items.Add(String.Concat(features[0], ",  name: ",features[2], ",  bd: ", features[1], ",  bh: ",  features[5]));
+                }
+                if (first == "Dog") 
+                {
+                    string[] features = s.Split(',');
+                    lbDogs.Items.Add(String.Concat(features[0], ",  name: ", features[2], ",  bd: ", features[1]));
+                }
             }
         }
 
+        private void buttonFind_Click(object sender, EventArgs e)
+        {
+            //string filename = txtFilename.Text;
+            //try
+            //{
+            //    string[] dirs = Directory.GetDirectories(@"c:\", "p*");
+            //    foreach (string d in dirs)
+            //    {
+            //        if (d == null) throw new ArgumentNullException(d);
+            //        //CheckContentsFile(d);
+            //        MessageBox.Show(d);
+            //    }
+            //}
+            //catch (ArgumentNullException ex)
+            //{
+            //    MessageBox.Show("No directories found\n" + ex.Message);
+            //}
+        }
     }
 }
