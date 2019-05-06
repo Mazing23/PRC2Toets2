@@ -38,10 +38,6 @@ namespace PRC2Toets2
             {
                 throw new IOException($"IO Excepttion: {ex.Message}");
             }
-            catch (SerializationException ex)
-            {
-                throw new SerializationException($"Serialization Exception: {ex.Message}");
-            }
             catch (ArgumentNullException ex)
             {
                 throw new ArgumentNullException($"Null Argument Exception: {ex.Message}");
@@ -105,10 +101,6 @@ namespace PRC2Toets2
             catch (IOException ex)
             {
                 throw new IOException($"IO Excepttion: {ex.Message}");
-            }
-            catch (SerializationException ex)
-            {
-                throw new SerializationException($"Serialization Exception: {ex.Message}");
             }
             catch (ArgumentNullException ex)
             {

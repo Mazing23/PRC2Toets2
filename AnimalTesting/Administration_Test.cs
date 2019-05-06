@@ -108,15 +108,9 @@ namespace AnimalTesting
         public void Administration_Save_IOException()
         {
             string foldername = "C:\\Users\\Gijs\\Documents\\School\\Animals.txt";
+            Stream stream = File.Open(foldername, FileMode.Create);
             admin.Save(foldername);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(SerializationException))]
-        public void Administration_Save_SerializationException()
-        {
-            string foldername = "D:\\Users\\Gijs\\Documents\\School\\Animals.txt";
-            admin.Save(foldername);
+            stream.Close();
         }
 
         [TestMethod]
@@ -139,15 +133,17 @@ namespace AnimalTesting
         [ExpectedException(typeof(IOException))]
         public void Administration_Load_IOException()
         {
-            string foldername = "D:\\Users\\Gijs\\Documents\\School\\Animals.txt";
+            string foldername = "C:\\Users\\Gijs\\Documents\\School\\Animals.txt";
+            Stream stream = File.Open(foldername, FileMode.Create);
             admin.Load(foldername);
+            stream.Close();
         }
 
         [TestMethod]
         [ExpectedException(typeof(SerializationException))]
         public void Administration_Load_SerializationException()
         {
-            string foldername = "C:\\Users\\Gijs\\Documents\\School\\Animals.txt";
+            string foldername = "C:\\Users\\Gijs\\Documents\\School\\yeet.txt";
             admin.Load(foldername);
         }
 
@@ -171,16 +167,10 @@ namespace AnimalTesting
         [ExpectedException(typeof(IOException))]
         public void Administration_Export_IOException()
         {
-            string foldername = "D:\\Users\\Gijs\\Documents\\School\\Animals.txt";
-            admin.Export(foldername);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(SerializationException))]
-        public void Administration_Export_SerializationException()
-        {
             string foldername = "C:\\Users\\Gijs\\Documents\\School\\Animals.txt";
+            Stream stream = File.Open(foldername, FileMode.Create);
             admin.Export(foldername);
+            stream.Close();
         }
 
         [TestMethod]
