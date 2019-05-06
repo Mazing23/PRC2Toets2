@@ -50,7 +50,6 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnimalFileImporter_Test.cs" />
     <Compile Include="Animal_Test.cs" />
     <Compile Include="Cat_Test.cs" />
     <Compile Include="Dog_Test.cs" />
