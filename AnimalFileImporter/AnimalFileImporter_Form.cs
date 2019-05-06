@@ -42,23 +42,11 @@ namespace AnimalFileImporter
         {
             string result = ChooseFolderPath();
             if (result == null) MessageBox.Show("No file was selected for importation");
-            try
-            {
-                CheckContentsFile(result);
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                MessageBox.Show($"Directory not found: {ex.Message}");
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show($"IO Exception: {ex.Message}");
-            }
-            catch(ArgumentNullException ex)
-            {
-                MessageBox.Show($"No file was selected for importation: {ex.Message}");
-            }
+            CheckContentsFile(result);
         }
+
+
+
 
         private void CheckContentsFile(string filename)
         {
@@ -88,22 +76,22 @@ namespace AnimalFileImporter
             {
                 MessageBox.Show($"IO Exception: {ex.Message}");
             }
-
             foreach (string s in allAnimals)
             {
                 string first = (s.Split(':')[0]);
                 if (first == "Cat")
                 {
                     string[] features = s.Split(',');
-                    lbCats.Items.Add(String.Concat(features[0], ",  name: ",features[2], ",  bd: ", features[1], ",  bh: ",  features[5]));
+                    lbCats.Items.Add(String.Concat(features[0], ",  name: ", features[2], ",  bd: ", features[1], ",  bh: ", features[5]));
                 }
-                if (first == "Dog") 
+                if (first == "Dog")
                 {
                     string[] features = s.Split(',');
                     lbDogs.Items.Add(String.Concat(features[0], ",  name: ", features[2], ",  bd: ", features[1]));
                 }
             }
         }
+    
 
         private void buttonFind_Click(object sender, EventArgs e)
         {

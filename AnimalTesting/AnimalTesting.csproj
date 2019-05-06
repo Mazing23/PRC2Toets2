@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnimalFileImporter_Test.cs" />
     <Compile Include="Animal_Test.cs" />
     <Compile Include="Cat_Test.cs" />
     <Compile Include="Dog_Test.cs" />
@@ -59,6 +60,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AnimalFileImporter\AnimalFileImporter.csproj">
+      <Project>{747cb074-93fa-493e-ab7f-c427d05847d1}</Project>
+      <Name>AnimalFileImporter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PRC2Toets2\AnimalShelter.csproj">
       <Project>{1cf04338-1364-4340-8fb0-6a885232bf84}</Project>
       <Name>AnimalShelter</Name>

@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 namespace AnimalTesting
 {
     [TestClass]
-    public class Animal_Test
+    public class AnimalImport_Test
     {
         Administration admin;
         Animal animala;

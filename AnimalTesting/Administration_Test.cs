@@ -15,6 +15,10 @@ namespace AnimalTesting
         Animal animalb;
         Animal animalc;
 
+        string fileNameRegular = @"C:\\PRCTOETS3\\ANIMALSRegular.txt";
+        string fileNameBinairy = @"C:\\PRCTOETS3\\ANIMALSBinairy.txt";
+        string fileNameFake = @"C:\\NEPPELOCATIE\\Animals.txt";
+
         [TestInitialize]
         public void Setup()
         {
@@ -22,6 +26,36 @@ namespace AnimalTesting
             animala = new Cat(13, new SimpleDate(9, 8, 1995), "Harry", "");
             animalb = new Dog(14, new SimpleDate(9, 8, 1995), "Harry", new SimpleDate(9, 6, 2018));
             animalc = new Dog(15, new SimpleDate(9, 8, 1995), "Harry", new SimpleDate(9, 6, 2018));
+
+            var dir = @"C:\\PRCTOETS3";
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
+            if (!File.Exists(fileNameBinairy))
+            {
+                File.Create(fileNameBinairy);
+            }
+            using (Stream stream = File.Open(fileNameBinairy, FileMode.Create))
+            {
+                BinaryFormatter bin = new BinaryFormatter();
+                bin.Serialize(stream, animala);
+                bin.Serialize(stream, animalb);
+                bin.Serialize(stream, animalc);
+            }
+
+           
+            if (!File.Exists(fileNameRegular))
+            {
+                File.Create(fileNameRegular);
+            }
+            using (StreamWriter stream = new StreamWriter(fileNameRegular))
+            {
+                stream.WriteLine(animala.ToString());
+                stream.WriteLine(animalb.ToString());
+                stream.WriteLine(animalc.ToString());
+            }
         }
 
         [TestMethod]
@@ -97,19 +131,15 @@ namespace AnimalTesting
         [ExpectedException(typeof(DirectoryNotFoundException))]
         public void Administration_Save_DirectoryException()
         {
-            string foldername = "C:\\Users\\Peter\\Documents\\School\\Animals.txt";
-            admin.Save(foldername);
-            string foldernamedos = "C:\\Users\\Gijs\\Documents\\School\\Animals.txt";
-            admin.Load(foldernamedos);
+            admin.Save(fileNameFake);
         }
 
         [TestMethod]
         [ExpectedException(typeof(IOException))]
         public void Administration_Save_IOException()
         {
-            string foldername = "C:\\Users\\Gijs\\Documents\\School\\Animals.txt";
-            Stream stream = File.Open(foldername, FileMode.Create);
-            admin.Save(foldername);
+            Stream stream = File.Open(fileNameRegular, FileMode.Create);
+            admin.Save(fileNameRegular);
             stream.Close();
         }
 
@@ -125,17 +155,16 @@ namespace AnimalTesting
         [ExpectedException(typeof(DirectoryNotFoundException))]
         public void Administration_Load_DirectoryException()
         {
-            string foldername = "C:\\Users\\Peter\\Documents\\School\\Animals.txt";
-            admin.Load(foldername);
+            admin.Load(fileNameFake);
         }
 
         [TestMethod]
         [ExpectedException(typeof(IOException))]
         public void Administration_Load_IOException()
         {
-            string foldername = "C:\\Users\\Gijs\\Documents\\School\\Animals.txt";
-            Stream stream = File.Open(foldername, FileMode.Create);
-            admin.Load(foldername);
+           
+            Stream stream = File.Open(fileNameRegular, FileMode.Create);
+            admin.Load(fileNameRegular);
             stream.Close();
         }
 
@@ -159,17 +188,15 @@ namespace AnimalTesting
         [ExpectedException(typeof(DirectoryNotFoundException))]
         public void Administration_Export_DirectoryException()
         {
-            string foldername = "C:\\Users\\Peter\\Documents\\School\\Animals.txt";
-            admin.Export(foldername);
+            admin.Export(fileNameFake);
         }
 
         [TestMethod]
         [ExpectedException(typeof(IOException))]
         public void Administration_Export_IOException()
         {
-            string foldername = "C:\\Users\\Gijs\\Documents\\School\\Animals.txt";
-            Stream stream = File.Open(foldername, FileMode.Create);
-            admin.Export(foldername);
+            Stream stream = File.Open(fileNameRegular, FileMode.Create);
+            admin.Export(fileNameRegular);
             stream.Close();
         }
 
