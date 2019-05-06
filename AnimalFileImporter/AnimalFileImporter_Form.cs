@@ -1,5 +1,4 @@
 ﻿
-using PRC2Toets2;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,22 +41,7 @@ namespace AnimalFileImporter
         {
             string result = ChooseFolderPath();
             if (result == null) MessageBox.Show("No file was selected for importation");
-            try
-            {
-                CheckContentsFile(result);
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                MessageBox.Show($"Directory not found: {ex.Message}");
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show($"IO Exception: {ex.Message}");
-            }
-            catch(ArgumentNullException ex)
-            {
-                MessageBox.Show($"No file was selected for importation: {ex.Message}");
-            }
+            CheckContentsFile(result);
         }
 
         private void CheckContentsFile(string filename)
