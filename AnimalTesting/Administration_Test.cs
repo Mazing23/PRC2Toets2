@@ -15,9 +15,9 @@ namespace AnimalTesting
         Animal animalb;
         Animal animalc;
 
-        string fileNameRegular = @"C:\\PRCTOETS3\\ANIMALSRegular.txt";
-        string fileNameBinairy = @"C:\\PRCTOETS3\\ANIMALSBinairy.txt";
-        string fileNameFake = @"C:\\NEPPELOCATIE\\Animals.txt";
+        string fileNameRegular = @"C:\PRCTOETS3\ANIMALSRegular.txt";
+        string fileNameBinairy = @"C:\PRCTOETS3\ANIMALSBinairy.txt";
+        string fileNameFake = @"C:\NEPPELOCATIE\Animals.txt";
 
         [TestInitialize]
         public void Setup()
@@ -27,7 +27,7 @@ namespace AnimalTesting
             animalb = new Dog(14, new SimpleDate(9, 8, 1995), "Harry", new SimpleDate(9, 6, 2018));
             animalc = new Dog(15, new SimpleDate(9, 8, 1995), "Harry", new SimpleDate(9, 6, 2018));
 
-            var dir = @"C:\\PRCTOETS3";
+            var dir = @"C:\PRCTOETS3";
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
@@ -138,9 +138,11 @@ namespace AnimalTesting
         [ExpectedException(typeof(IOException))]
         public void Administration_Save_IOException()
         {
-            Stream stream = File.Open(fileNameRegular, FileMode.Create);
-            admin.Save(fileNameRegular);
-            stream.Close();
+            using (Stream stream = File.Open(fileNameRegular, FileMode.Create))
+            {
+                admin.Save(fileNameRegular);
+                stream.Close();
+            }
         }
 
         [TestMethod]
@@ -162,10 +164,12 @@ namespace AnimalTesting
         [ExpectedException(typeof(IOException))]
         public void Administration_Load_IOException()
         {
-           
-            Stream stream = File.Open(fileNameRegular, FileMode.Create);
-            admin.Load(fileNameRegular);
-            stream.Close();
+
+            using (Stream stream = File.Open(fileNameRegular, FileMode.Create))
+            {
+                admin.Load(fileNameRegular);
+                stream.Close();
+            }
         }
 
         [TestMethod]
@@ -195,9 +199,11 @@ namespace AnimalTesting
         [ExpectedException(typeof(IOException))]
         public void Administration_Export_IOException()
         {
-            Stream stream = File.Open(fileNameRegular, FileMode.Create);
-            admin.Export(fileNameRegular);
-            stream.Close();
+            using (Stream stream = File.Open(fileNameRegular, FileMode.Create))
+            {
+                admin.Export(fileNameRegular);
+                stream.Close();
+            }
         }
 
         [TestMethod]
