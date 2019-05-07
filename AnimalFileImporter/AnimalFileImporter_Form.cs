@@ -51,17 +51,25 @@ namespace AnimalFileImporter
             if (File.Exists(filename))
             {
                 string lines;
-                using (StreamReader reader = new StreamReader(filename))
+                try
                 {
-                    List<string> animal = new List<string>();
-                    while (!reader.EndOfStream)
+                    using (StreamReader reader = new StreamReader(filename))
                     {
-                        while ((lines = reader.ReadLine()) != null)
+                        List<string> animal = new List<string>();
+                        while (!reader.EndOfStream)
                         {
-                            allAnimals.Add(lines);
+                            while ((lines = reader.ReadLine()) != null)
+                            {
+                                allAnimals.Add(lines);
+                            }
                         }
                     }
                 }
+                catch (IOException ex)
+                {
+                    MessageBox.Show("Couldn't read: " + ex.Message);
+                }
+                
             }
             foreach (string s in allAnimals)
             {
@@ -79,24 +87,5 @@ namespace AnimalFileImporter
             }
         }
     
-
-        private void buttonFind_Click(object sender, EventArgs e)
-        {
-            //string filename = txtFilename.Text;
-            //try
-            //{
-            //    string[] dirs = Directory.GetDirectories(@"c:\", "p*");
-            //    foreach (string d in dirs)
-            //    {
-            //        if (d == null) throw new ArgumentNullException(d);
-            //        //CheckContentsFile(d);
-            //        MessageBox.Show(d);
-            //    }
-            //}
-            //catch (ArgumentNullException ex)
-            //{
-            //    MessageBox.Show("No directories found\n" + ex.Message);
-            //}
-        }
     }
 }

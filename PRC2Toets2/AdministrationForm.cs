@@ -26,8 +26,8 @@ namespace PRC2Toets2
             InitializeComponent();
             animalTypeComboBox.SelectedIndex = 0;
             admin = new Administration();
-            AnimalDump();
-            //SecondAnimalDump();
+            //AnimalDump();
+            SecondAnimalDump();
             UpdateListBox();
         }
 
@@ -323,6 +323,5 @@ namespace PRC2Toets2
             five.IsReserved = false;
         }
 
-        
     }
 }
